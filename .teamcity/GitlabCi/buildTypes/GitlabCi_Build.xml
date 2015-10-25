@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="5d52dcb2-6f62-46eb-a7d1-6f027b650f40" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Build</name>
+  <description />
+  <settings>
+    <options>
+      <option name="showDependenciesChanges" value="true" />
+    </options>
+    <parameters />
+    <build-runners>
+      <runner id="RUNNER_118" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="sh script/prepare_build.sh" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_119" name="" type="rake-runner">
+        <parameters>
+          <param name="build-file-path" value="Rakefile" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="ui.rakeRunner.bunlder.exec.enabled" value="true" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="GitlabCi_HttpsGithubComTiger66639gitlabCiGitRefsHeadsMaster" />
+    </vcs-settings>
+    <requirements />
+    <build-triggers>
+      <build-trigger id="vcsTrigger" type="vcsTrigger">
+        <parameters>
+          <param name="groupCheckinsByCommitter" value="true" />
+          <param name="perCheckinTriggering" value="true" />
+          <param name="quietPeriodMode" value="USE_DEFAULT" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <build-extensions>
+      <extension id="BUILD_EXT_32" type="VcsLabeling">
+        <parameters>
+          <param name="labelingPattern" value="build-%system.build.number%" />
+          <param name="vcsRootId" value="GitlabCi_HttpsGithubComTiger66639gitlabCiGitRefsHeadsMaster" />
+        </parameters>
+      </extension>
+    </build-extensions>
+    <cleanup />
+  </settings>
+</build-type>
+
